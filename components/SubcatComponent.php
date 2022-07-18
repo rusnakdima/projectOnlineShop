@@ -11,4 +11,8 @@
             $data = (new \yii\db\Query())->from('subcategories')->all();
             return $data;
         }
+        public function getDataSubCat($category){
+            $data = (new \yii\db\Query())->from('subcategories')->where(['category' => (new \yii\db\Query())->from('categories')->where(['category' => $category])->one()['id']])->all();
+            return $data;
+        }
     }

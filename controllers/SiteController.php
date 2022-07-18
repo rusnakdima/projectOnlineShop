@@ -23,14 +23,33 @@
             ];
         }
         public function actionIndex(){
-            $dataPopular = (new \yii\db\Query())->from('products')->all();
-            $dataNewProduct = (new \yii\db\Query())->select('created_at')->from('products')->all();
+            $dataOrder = (new \yii\db\Query())->from('orders')->all();
             $arr = [];
-            $j = 0;
-            for($i = 0; $i < count($dataNewProduct); $i++){
-                if(date("Y-m", strtotime($dataNewProduct[$i]['created_at'])) == date("Y-m")){
-                    $arr[$j] = ((new \yii\db\Query())->from('products')->where(['created_at' => $dataNewProduct[$i]['created_at']])->all()[0]);
-                    $j++;
+            foreach($dataOrder as $item){
+                if(array_key_exists($item['product_id'], $arr)){
+                    $arr[$item['product_id']] += $item['count'];
+                } else {
+                    $arr[$item['product_id']] = $item['count'];
+                }
+            }
+            $dataPopular = (new \yii\db\Query())->from('products')->orderBy('count_add_cart DESC')->limit(6)->all();
+            $dataNewProduct = (new \yii\db\Query())->from('products')->orderBy('created_at DESC')->limit(6)->all();
+            for($i = 0; $i < count($dataPopular); $i++){
+                $dataPopular[$i]['orders'] = 0;
+                $dataNewProduct[$i]['orders'] = 0;
+            }
+            foreach($dataPopular as $key => $item){
+                foreach($arr as $key1 => $val){
+                    if($item['id'] == $key1){
+                        $dataPopular[$key]['orders'] = $val;
+                    }
+                }
+            }
+            foreach($dataNewProduct as $key => $item){
+                foreach($arr as $key1 => $val){
+                    if($item['id'] == $key1){
+                        $dataNewProduct[$key]['orders'] = $val;
+                    }
                 }
             }
 
@@ -39,7 +58,7 @@
 
             return $this->render('index', [
                 'dataPopular' => $dataPopular,
-                'dataNewProduct' => $arr,
+                'dataNewProduct' => $dataNewProduct,
                 'category' => $category,
                 'subcategory' => $subcategory,
             ]);

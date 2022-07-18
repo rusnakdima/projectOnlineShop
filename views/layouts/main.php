@@ -24,12 +24,16 @@
             input, textarea{
                 border: none;
             }
+            .nav-tabs .nav-link.active{
+                background-color: rgba(0,0,0,0);
+                border-bottom: 1px solid rgba(0,0,0,0);
+            }
         </style>
     </head>
     <body style="text-align: justify" class="bg-white text-dark">
         <?php $this->beginBody() ?>
 
-        <div id="profile" class="bg-white border rounded-3 p-3" style="float: right; right: 5px; top: 70px; position: absolute; text-align: center;">
+        <div id="profile" class="bg-white text-dark border rounded-3 p-3" style="float: right; right: 5px; top: 70px; position: absolute; text-align: center;">
             <div class="figure-img"><ion-icon name="person-outline"></ion-icon></div>
             <big><?= Yii::$app->user->identity->username ?></big><br>
             <?php if(Yii::$app->user->identity->username == "admin"){?>
@@ -39,7 +43,7 @@
         </div>
 
         <!--Header-->
-        <header class="navbar navbar-expand-lg d-flex flex-wrap border-bottom text-light">
+        <header class="navbar navbar-expand-lg d-flex flex-wrap border-bottom bg-white text-light">
             <div class="container-fluid row row-cols-auto">
                 <a href="/" class="col d-flex align-items-center mb-2 mb-md-0 text-decoration-none">Name company</a>
                 <button class="col border-0 bg-white text-dark" type="button" id="navMenu" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -105,14 +109,16 @@
         <!--Footer-->
         <footer> 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-2 mt-5 mx-2 border-top">
-                <div class="col mb-3">
-                    <h5><a href="<?= Url::to(['products/catitem', 'item'=>'Smartfone']); ?>" class="nav-link p-0">Smartfone</a></h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">no name</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">no name</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">no name</a></li>
-                    </ul>
-                </div>
+                <?php foreach (Yii::$app->cat->getData() as $item){?>
+                    <div class="col mb-3">
+                        <h5><a href="<?= Url::to(['products/catitem', "item" => $item["category"], 'sort'=>'popularity']); ?>" class="nav-link p-0"><?= $item["category"]; ?></a></h5>
+                        <ul class="nav flex-column">
+                            <?php foreach (Yii::$app->subcat->getDataSubCat($item["category"]) as $item){?>
+                                <li class="nav-item mb-2"><a href="<?= Url::to(['products/subcatitem', "item" => $item["subcategory"], 'sort'=>'popularity']); ?>" class="nav-link p-0"><?= $item["subcategory"]; ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                <?php } ?>
             </div>
             <div class="py-1 my-5 mx-2 border-top">
                 <a href="/" class="link-dark text-decoration-none">Name company</a><br><br>
@@ -144,15 +150,18 @@
             function LightTheme(){
                 localStorage["theme"] = "light";
                 var title = "<?php echo $this->title ?>";
-                var list = document.querySelectorAll('.navbar .nav-link');
+                var list = document.querySelectorAll('header .nav-link');
                 $(".bg-dark, input, textarea, select").addClass("bg-white").removeClass("bg-dark");
                 $(".text-light, .navbar a, input, textarea, select").addClass("text-dark").removeClass("text-light");
+                $(".nav-link").css({"color": "#000"});
                 $("footer .nav-link").css({"color": "rgba(31,37,41,0.75)"});
-                $(".navbar .nav-link, .dropdown-item").removeClass("text-dark").css({"color":"#000", "background":"#fff"});
-                $(".navbar .nav-link, .dropdown-item").mouseover(function(){
+                $(".nav-tabs .nav-link").css({"color": "#000", "background-color":"rgba(0,0,0,0)"});
+                $(".nav-tabs .nav-link.active").css({"color": "#000", "background-color":"rgba(0,0,0,0)"});
+                $("header .nav-link, .dropdown-item").removeClass("text-dark").css({"color":"#000", "background":"#fff"});
+                $("header .nav-link, .dropdown-item").mouseover(function(){
                     $(this).css({"background-color": "#ccc", "color": "#000"});
                 });
-                $(".navbar .nav-link, .dropdown-item").mouseout(function(){
+                $("header .nav-link, .dropdown-item").mouseout(function(){
                     $(this).css({"background-color": "#fff", "color": "#000"});
                     for(var i = 0; i < list.length; i++){
                         if($(list[i]).text() == title){
@@ -160,6 +169,7 @@
                         }
                     }
                 });
+
                 for(var i = 0; i < list.length; i++){
                     if($(list[i]).text() == title){
                         $(list[i]).css({"color":"#000"});
@@ -184,7 +194,10 @@
                 var list = document.querySelectorAll('.navbar .nav-link');
                 $(".bg-white, input, textarea, select").addClass("bg-dark").removeClass("bg-white");
                 $(".text-dark, .navbar a, input, textarea, select").addClass("text-light").removeClass("text-dark");
-                $(".nav-link").css({"color": "rgba(248,249,250,0.75)"});
+                $(".nav-link").css({"color": "#fff"});
+                $("footer .nav-link").css({"color": "rgba(248,249,250,0.75)"});
+                $(".nav-tabs .nav-link").css({"color": "#fff", "background-color":"rgba(0,0,0,0)"});
+                $(".nav-tabs .nav-link.active").css({"color": "#fff"});
                 $(".navbar .nav-link, .dropdown-item").removeClass("text-light").css({"color":"#fff", "background":"#212529"});
                 $(".navbar .nav-link, .dropdown-item").mouseover(function(){
                     $(this).css({"background-color": "#666", "color": "#fff"});
@@ -197,6 +210,7 @@
                         }
                     }
                 });
+
                 for(var i = 0; i < list.length; i++){
                     if($(list[i]).text() == title){
                         $(list[i]).css({"color":"#fff"});

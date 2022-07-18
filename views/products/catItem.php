@@ -1,6 +1,5 @@
 <?php
     use yii\helpers\Url;
-    use yii\widgets\ActiveForm;
 
     $this->title = $_GET['item'];
 ?>

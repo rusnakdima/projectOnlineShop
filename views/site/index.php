@@ -16,43 +16,41 @@
     </ul>
 </section>
 
-<div id="blockPopular">
+<div id="blockPopular" class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-2 mt-5 mx-2 bg-white text-dark">
-        <?php for($i = 0; $i < count($dataPopular); $i++){ ?>
+        <?php foreach($dataPopular as $item){ ?>
             <div class="col mb-3">
-                <a href="<?= Url::to(['products/infoitem', 'item'=>$dataPopular[$i]['product']]); ?>" class="link-dark text-decoration-none">
-                    <div class="text-center">
-                        <img style="width: auto; height: auto;" alt="Image" src="assets/images/<?php echo $dataPopular[$i]['link']; ?>" /><br>
-                        <!--<span><?php $num = $dataPopular[$i]['category']; echo $category[$num-1]['category']; ?> -> <?php $num = $dataPopular[$i]['subcategory']; echo $subcategory[$num-1]['subcategory']; ?></span>-->
-                        <h5><?php echo $dataPopular[$i]['product']; ?></h5>
-                        <?php if($dataPopular[$i]['discount'] > 0){ ?>
-                            <h5><s><?php echo $dataPopular[$i]['price']; ?>$</s></h5>
-                            <h5><span style="color: red;"><?php $num = $dataPopular[$i]['price'] - ($dataPopular[$i]['price'] * ($dataPopular[$i]['discount'] / 100)); echo $num; ?>$</span></h5>
-                        <?php } else { ?>
-                            <h5><?php echo $dataPopular[$i]['price']; ?>$</h5>
-                        <?php } ?>
-                    </div>
+                <a href="<?= Url::to(['products/infoitem', 'item'=>$item['product']]); ?>" class="link-dark text-decoration-none">
+                    <img style="width: auto; height: auto;" alt="Image" src="assets/images/<?php echo $item['link']; ?>" /><br>
+                    <!--<span><?php $num = $item['category']; echo $category[$num-1]['category']; ?> -> <?php $num = $item['subcategory']; echo $subcategory[$num-1]['subcategory']; ?></span>-->
+                    <h5><?php echo $item['product']; ?></h5>
+                    <?php if($item['discount'] > 0){ ?>
+                        <h5><b><i><?php $num = $item['price'] - ($item['price'] * ($item['discount'] / 100)); echo $num; ?>$</i></b></h5>
+                        <h5 class="text-muted"><i><s><?php echo $item['price']; ?>$</s></i></h5>
+                    <?php } else { ?>
+                        <h5><b><i><?php echo $item['price']; ?>$</i></b></h5>
+                    <?php } ?>
+                    <span><?php echo $item['orders']; ?> orders</span>
                 </a>
             </div>
         <?php } ?>
     </div>
 </div>
-<div id="blockNewProduct">
+<div id="blockNewProduct" class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-2 mt-5 mx-2 bg-white text-dark">
-        <?php for($i = 0; $i < count($dataNewProduct); $i++){ ?>
+        <?php foreach($dataNewProduct as $item){ ?>
             <div class="col mb-3">
-                <a href="<?= Url::to(['products/infoitem', 'item'=>$dataNewProduct[$i]['product']]); ?>" class="link-dark text-decoration-none">
-                    <div class="text-center">
-                        <img style="width: auto; height: auto;" alt="Image" src="assets/images/<?php echo $dataNewProduct[$i]['link']; ?>" /><br>
-                        <!--<span><?php $num = $dataNewProduct[$i]['category']; echo $category[$num-1]['category']; ?> -> <?php $num = $dataNewProduct[$i]['subcategory']; echo $subcategory[$num-1]['subcategory']; ?></span>-->
-                        <h5><?php echo $dataNewProduct[$i]['product']; ?></h5>
-                        <?php if($dataNewProduct[$i]['discount'] > 0){ ?>
-                            <h5><s><?php echo $dataNewProduct[$i]['price']; ?>$</s></h5>
-                            <h5><span style="color: red;"><?php $num = $dataNewProduct[$i]['price'] - ($dataNewProduct[$i]['price'] * ($dataNewProduct[$i]['discount'] / 100)); echo $num; ?>$</span></h5>
-                        <?php } else { ?>
-                            <h5><?php echo $dataNewProduct[$i]['price']; ?>$</h5>
-                        <?php } ?>
-                    </div>
+                <a href="<?= Url::to(['products/infoitem', 'item'=>$item['product']]); ?>" class="link-dark text-decoration-none">
+                    <img style="width: auto; height: auto;" alt="Image" src="assets/images/<?php echo $item['link']; ?>" /><br>
+                    <!--<span><?php $num = $item['category']; echo $category[$num-1]['category']; ?> -> <?php $num = $item['subcategory']; echo $subcategory[$num-1]['subcategory']; ?></span>-->
+                    <h5><?php echo $item['product']; ?></h5>
+                    <?php if($item['discount'] > 0){ ?>
+                        <h5><b><i><?php $num = $item['price'] - ($item['price'] * ($item['discount'] / 100)); echo $num; ?>$</i></b></h5>
+                        <h5 class="text-muted"><i><s><?php echo $item['price']; ?>$</s></i></h5>
+                    <?php } else { ?>
+                        <h5><b><i><?php echo $item['price']; ?>$</i></b></h5>
+                    <?php } ?>
+                    <span><?php echo $item['orders']; ?> orders</span>
                 </a>
             </div>
         <?php } ?>

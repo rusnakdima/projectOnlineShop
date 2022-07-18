@@ -35,16 +35,20 @@ class m220712_094521_accounts extends Migration
             'description' => $this->text(),
             'specifications' => $this->text(),
             'link' => $this->text(),
-            'created_at' => $this->timestamp()->notNull()->defaultValue(null),
-            'updated_at' => $this->timestamp()->notNull()->defaultValue(null)->append('ON UPDATE CURRENT_TIMESTAMP'),
+            'count_add_cart' => $this->integer(),
+            'created_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP',//$this->timestamp()->notNull()->defaultValue('CURRENT_TIMESTAMP'),
+            'updated_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',//$this->timestamp()->notNull()->defaultValue('CURRENT_TIMESTAMP')->append('ON UPDATE CURRENT_TIMESTAMP'),
         ]);
         $this->createTable('orders', [
             'id' => $this->primaryKey(),
             'product_id' => $this->integer(),
             'user_id' => $this->integer(),
-            'date' => $this->timestamp()->notNull()->defaultValue(null),
+            'name' => $this->text(),
+            'surname' => $this->text(),
+            'date' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP',//$this->timestamp()->notNull()->defaultValue(null),
             'address' => $this->text(),
             'phone' => $this->string(11),
+            'email' => $this->text(),
             'count' => $this->integer(),
             'cost' => $this->integer(),
         ]);
@@ -91,7 +95,6 @@ class m220712_094521_accounts extends Migration
     }
 
     public function down(){
-        $this->dropTable('accounts');
         $this->dropForeignKey(
             'fk-products-categories-id',
             'products'
@@ -112,6 +115,11 @@ class m220712_094521_accounts extends Migration
             'fk-orders-accounts-id',
             'orders'
         );
+        $this->dropTable('accounts');
+        $this->dropTable('orders');
+        $this->dropTable('categories');
+        $this->dropTable('subcategories');
+        $this->dropTable('products');
         return false;
     }
     public function safeUp(){}
