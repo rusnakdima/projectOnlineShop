@@ -33,20 +33,11 @@
     <body style="text-align: justify" class="bg-white text-dark">
         <?php $this->beginBody() ?>
 
-        <div id="profile" class="bg-white text-dark border rounded-3 p-3" style="float: right; right: 5px; top: 70px; position: absolute; text-align: center;">
-            <div class="figure-img"><ion-icon name="person-outline"></ion-icon></div>
-            <big><?= Yii::$app->user->identity->username ?></big><br>
-            <?php if(Yii::$app->user->identity->username == "admin"){?>
-                <a type="button" href="<?= Url::to(['admin/index']); ?>" class="btn btn-primary">Admin Panel</a><br><br>
-            <?php } ?>
-            <a type="button" href="<?= Url::to(['site/logout']) ?>" class="btn btn-primary">Log out</a>
-        </div>
-
         <!--Header-->
         <header class="navbar navbar-expand-lg d-flex flex-wrap border-bottom bg-white text-light">
             <div class="container-fluid row row-cols-auto">
                 <a href="/" class="col d-flex align-items-center mb-2 mb-md-0 text-decoration-none">Name company</a>
-                <button class="col border-0 bg-white text-dark" type="button" id="navMenu" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <button class="col border-0 bg-white text-dark" type="button" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <ion-icon name="reorder-three-outline" style="width: 2.5em; height: 2.5em;"></ion-icon>
                 </button>
                 <form class="col d-flex" method="get" action="<?= Url::to(["products/search"]); ?>">
@@ -79,7 +70,9 @@
                         <a type="button" class="btn btn-outline-primary me-2" href="<?= Url::to(['site/login']) ?>">Login</a>
                         <a type="button" class="btn btn-primary" href="<?= Url::to(['site/register']) ?>">Sign-up</a>
                     <?php } else { ?>
-                        <ion-icon onclick="$('#profile').toggle();" name="person-outline"></ion-icon>
+                        <button class="border-0 bg-white text-dark" type="button" data-bs-toggle="collapse" href="#profile" role="button" aria-expanded="false" aria-controls="profile">
+                            <ion-icon name="person-outline"></ion-icon>
+                        </button>
                     <?php } ?>
                 </div>
             </div>
@@ -101,6 +94,14 @@
                     <?php } ?>
                 </ul>
             </div>
+        </div>
+        <div id="profile" class="collapse dropdown-menu bg-white text-dark border rounded-3 p-3 text-center float-end position-absolute" style="right: 5px;">
+            <div class="figure-img"><ion-icon name="person-outline"></ion-icon></div>
+            <big><?= Yii::$app->user->identity->username ?></big><br>
+            <?php if(Yii::$app->user->identity->username == "admin"){?>
+                <a type="button" href="<?= Url::to(['admin/index']); ?>" class="btn btn-primary">Admin Panel</a><br><br>
+            <?php } ?>
+            <a type="button" href="<?= Url::to(['site/logout']) ?>" class="btn btn-primary">Log out</a>
         </div>
 
         <!--Content-->
@@ -138,10 +139,6 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script>
-            $('#profile, #menu').hide();
-            $("#navMenu").click(function(){
-                $("#menu").toggle();
-            });
             $(document).ready(function() {
                 if(localStorage['theme'] == undefined) localStorage['theme'] = "light";
                 if(localStorage['theme'] == "light") LightTheme();

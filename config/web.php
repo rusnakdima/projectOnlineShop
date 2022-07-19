@@ -50,6 +50,9 @@ $config = [
         'subcat' => [
             'class' => 'app\components\SubcatComponent',
         ],
+        'adminlogin' => [
+            'class' => 'app\components\AdminLoginComponent',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

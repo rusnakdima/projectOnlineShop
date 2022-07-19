@@ -1,10 +1,33 @@
 <?php
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use yii\widgets\ActiveForm;
     use yii\widgets\LinkPager;
 
     $this->title = 'Category Edit';
 ?>
+
+<div class="modal border">
+    <div class="modal-dialog">
+        <div class="modal-content bg-white text-dark">
+            <div class="modal-header">
+                <h5 class="modal-title">Password Request</h5>
+            </div>
+            <form method="post" action="<?= Url::to(['']); ?>">
+                <div class="modal-body">
+                    <?php if($rezIn){ ?>
+                        <span style="color:red;">Incorrect Password</span>
+                    <?php } ?>
+                    <input type="text" class="form-control" placeholder="Enter your password" name="pass" autocomplete="off" required />
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" href="<?= Url::to(['site/index']); ?>">Cancel</a>
+                    <button class="btn btn-primary">Ok</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="container bg-white text-dark border rounded-2 px-5 py-5">
     <a onclick="window.history.back();" class="text-decoration-none bg-white text-dark"><ion-icon name="arrow-back-outline"></ion-icon></a>
@@ -95,6 +118,12 @@
 
 
 <script>
+    $('.modal').show();
+    if(<?= Yii::$app->session['admin'] ?>){
+        $(".modal").hide();
+    } else {
+        $('.modal').show();
+    }
     $(".pagination > li").attr('class', 'page-item');
     $("td").click(function(){
         var elem = $(this).parent();
