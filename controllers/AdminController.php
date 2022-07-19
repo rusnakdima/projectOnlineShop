@@ -79,24 +79,8 @@
                 }
                 return $this->redirect(['subcatedit']);
             }
-            if(Yii::$app->session['admin'] == null){
-                Yii::$app->session->set('admin', 'false');
-            }
-            if($_POST['pass'] != null){
-                if(Yii::$app->adminlogin->checkPass($_POST['pass'])){
-                    return $this->redirect('subcatedit');
-                } else {
-                    return $this->render('subcatedit', [
-                        'dataSubcategory' => $postsSubcategory,
-                        'pagesSubcategory' => $pagesSubcategory,
-                        'subcategoryEdit' => $subcategoryEdit,
-                        'find' => $find,
-                        'delItem' => $delItem,
-                        'category' => $category,
-                        'subcategory' => $subcategory,
-                        'rezIn' => 'true',
-                    ]);
-                }
+            if(Yii::$app->session['admin'] == 'false' || Yii::$app->session['admin'] == null){
+                return $this->redirect(['index']);
             }
             return $this->render('subcatedit', [
                 'dataSubcategory' => $postsSubcategory,
@@ -139,23 +123,8 @@
                 }
                 return $this->redirect(['catedit']);
             }
-            if(Yii::$app->session['admin'] == null){
-                Yii::$app->session->set('admin', 'false');
-            }
-            if($_POST['pass'] != null){
-                if(Yii::$app->adminlogin->checkPass($_POST['pass'])){
-                    return $this->redirect('catedit');
-                } else {
-                    return $this->render('catedit', [
-                        'dataCategory' => $postsCategory,
-                        'pagesCategory' => $pagesCategory,
-                        'categoryEdit' => $categoryEdit,
-                        'find' => $find,
-                        'delItem' => $delItem,
-                        'category' => $category,
-                        'rezIn' => 'true',
-                    ]);
-                }
+            if(Yii::$app->session['admin'] == 'false' || Yii::$app->session['admin'] == null){
+                return $this->redirect(['index']);
             }
             return $this->render('catedit', [
                 'dataCategory' => $postsCategory,
@@ -198,24 +167,8 @@
                 }
                 return $this->redirect(['productedit']);
             }
-            if(Yii::$app->session['admin'] == null){
-                Yii::$app->session->set('admin', 'false');
-            }
-            if($_POST['pass'] != null){
-                if(Yii::$app->adminlogin->checkPass($_POST['pass'])){
-                    return $this->redirect('productedit');
-                } else {
-                    return $this->render('productedit', [
-                        'dataProduct' => $postsProduct,
-                        'pagesProduct' => $pagesProduct,
-                        'productEdit' => $productEdit,
-                        'find' => $find,
-                        'delItem' => $delItem,
-                        'category' => $category,
-                        'subcategory' => $subcategory,
-                        'rezIn' => 'true',
-                    ]);
-                }
+            if(Yii::$app->session['admin'] == 'false' || Yii::$app->session['admin'] == null){
+                return $this->redirect(['index']);
             }
             return $this->render('productedit', [
                 'dataProduct' => $postsProduct,
@@ -243,22 +196,8 @@
                 $pagesOrder = new Pagination(['totalCount' => $dataOrder->count(), 'pageSize' => 10]);
                 $postsOrder = $dataOrder->offset($pagesOrder->offset)->limit($pagesOrder->limit)->all();
             }
-            if(Yii::$app->session['admin'] == null){
-                Yii::$app->session->set('admin', 'false');
-            }
-            if($_POST['pass'] != null){
-                if(Yii::$app->adminlogin->checkPass($_POST['pass'])){
-                    return $this->redirect('orderItem');
-                } else {
-                    return $this->render('orderItem', [
-                        'dataProduct' => $dataProduct,
-                        'dataOrder' => $postsOrder,
-                        'pagesOrder' => $pagesOrder,
-                        'find' => $find,
-                        'account' => $account,
-                        'rezIn' => 'true',
-                    ]);
-                }
+            if(Yii::$app->session['admin'] == 'false' || Yii::$app->session['admin'] == null){
+                return $this->redirect(['index']);
             }
             return $this->render('orderItem', [
                 'dataProduct' => $dataProduct,
