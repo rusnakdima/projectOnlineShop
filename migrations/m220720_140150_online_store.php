@@ -2,10 +2,7 @@
 
 use yii\db\Migration;
 
-/**
- * Class m220720_140150_noname
- */
-class m220720_140150_noname extends Migration
+class m220720_140150_online_store extends Migration
 {
     /**
      * {@inheritdoc}
@@ -171,7 +168,7 @@ class m220720_140150_noname extends Migration
 
         return false;
     }
-    
+
     /*
     // Use up()/down() to run migration code without a transaction.
     public function up()

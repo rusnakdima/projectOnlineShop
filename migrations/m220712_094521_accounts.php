@@ -7,7 +7,7 @@ use yii\db\Migration;
  */
 class m220712_094521_accounts extends Migration
 {
-    public function up(){
+    /* public function up(){
         $this->createTable('accounts', [
             'id' => $this->primaryKey(),
             'username' => $this->string(45),
@@ -166,5 +166,5 @@ class m220712_094521_accounts extends Migration
     }
     public function safeUp(){}
 
-    public function safeDown(){}
+    public function safeDown(){} */
 }
