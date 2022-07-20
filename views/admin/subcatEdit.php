@@ -4,13 +4,13 @@
     use yii\widgets\ActiveForm;
     use yii\widgets\LinkPager;
 
-    $this->title = 'Subcategory Edit';
+    $this->title = Yii::t('app', 'Editing subcategories');
 ?>
 
 <div class="container bg-white text-dark border rounded-2 px-5 py-5">
     <a onclick="window.history.back();" class="text-decoration-none bg-white text-dark"><ion-icon name="arrow-back-outline"></ion-icon></a>
     <div class="row row-cols-auto">
-        <h3 class="col-6 mb-3 fw-normal">Subcategory Item</h3>
+        <h3 class="col-6 mb-3 fw-normal"><?= Yii::t('app', 'Subcategories') ?></h3>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($find, 'subcategory', [
                 'template' => '<div class="form-floating col d-flex text-right">{input}{label}<button class="border-0 bg-white text-dark"><ion-icon name="search-outline" style="width: 2em; height: 2em;"></ion-icon></button></div>',
@@ -21,16 +21,16 @@
                 'labelOptions' => [
                     'for' => 'fSubcat',
                 ],
-            ])->textInput()->label('Search Subcategory') ?>
+            ])->textInput()->label(Yii::t('app', 'Search Subcategories')) ?>
         <?php ActiveForm::end(); ?>
     </div>
-    <h5>Subcategory</h5>
+    <br>
     <table cellspacing="0" cellpadding="5" id="subcategories">
         <thead>
             <tr>
                 <td class="border">ID</td>
-                <td class="border">Subcategory (Name)</td>
-                <td class="border">Category (Name)</td>
+                <td class="border"><?= Yii::t('app', 'Subcategory name') ?></td>
+                <td class="border"><?= Yii::t('app', 'Category name') ?></td>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@
 
 <div class="container bg-white text-dark border rounded-2 px-5 py-5">
     <details>
-        <summary class="h3 mb-3 fw-normal">Edit and Save Data</summary>
+        <summary class="h3 mb-3 fw-normal"><?= Yii::t('app', 'Edit and Save Data') ?></summary>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($subcategoryEdit, 'id', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
@@ -74,7 +74,7 @@
                 'labelOptions' => [
                     'for' => 'subcategoryS',
                 ],
-            ])->textInput()->label('Subcategory') ?>
+            ])->textInput()->label(Yii::t('app', 'Subcategory ')) ?>
             <?= $form->field($subcategoryEdit, 'category', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                 'inputOptions' => [
@@ -84,18 +84,18 @@
                 'labelOptions' => [
                     'for' => 'categoryS',
                 ],
-            ])->textInput()->label('Category (ID)') ?>
+            ])->textInput(['type' => 'number'])->label(Yii::t('app', 'Category').' (ID)') ?>
             <div class="mx-2" id="categoryList">
                 <span>List</span><br>
                 <?php for($i = 0; $i < count($category); $i++){ ?>
                     <?php print_r('<span>'.($i+1).'—'.$category[$i]['category']."</span><br>"); ?>
                 <?php } ?>
             </div>
-            <?= Html::submitButton('Update/Save', ['class' => 'btn btn-lg btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Update/Save'), ['class' => 'btn btn-lg btn-primary']) ?>
         <?php ActiveForm::end(); ?>
     </details>
     <details>
-        <summary class="h3 mb-3 fw-normal">Delete Data</summary>
+        <summary class="h3 mb-3 fw-normal"><?= Yii::t('app', 'Delete Data') ?></summary>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($delItem, 'id', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
@@ -107,7 +107,7 @@
                     'for' => 'id1',
                 ],
             ])->textInput()->label('ID') ?>
-            <?= Html::submitButton('Delete', ['class' => 'btn btn-lg btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Delete'), ['class' => 'btn btn-lg btn-primary']) ?>
         <?php ActiveForm::end(); ?>
     </details>
 </div>

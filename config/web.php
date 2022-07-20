@@ -5,6 +5,8 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'language' => 'en',
+    'sourceLanguage' => 'en',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -56,6 +58,9 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['en', 'ru'],
+            'enableDefaultLanguageUrlCode' => true,
             'rules' => [
                 '' => 'site/index',
                 '/login' => 'site/login',
@@ -69,10 +74,22 @@ $config = [
                 '/infoitem' => 'products/infoitem',
                 '/cartitem' => 'products/cartitem',
                 '/orderedit' => 'orders/orderedit',
-                /*'/subcatedit' => 'admin/subcatedit',
-                '/catedit' => 'admin/catedit',
-                '/productedit' => 'admin/productedit',
-                '/orderitem' => 'admin/orderitem',*/
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    /*'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',*/
+                    'class' => 'yii\i18n\DbMessageSource',
+                    /*'forceTranslation'=>true,
+                    'sourceMessageTable' => '{{%source_message}}',
+                    'messageTable' => '{{%message}}',
+                    'enableCaching' => true,
+                    'cachingDuration' => 10,*/
+                    'sourceLanguage' => 'en',
+                    'on missingTranslation' => ['app\components\TranslationEventHandler', 'handleMissingTranslation']
+                ],
             ],
         ],
     ],

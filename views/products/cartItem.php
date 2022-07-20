@@ -1,5 +1,5 @@
 <?php
-    $this->title = 'Cart';
+    $this->title = Yii::t('app', 'Cart');
     use yii\helpers\Url;
 ?>
 
@@ -18,7 +18,7 @@
     <!--Output data from basket-->
     <div class="row row-cols-2">
         <div class="col-md-8">
-            <h4 class="border-bottom">My Basket</h4>
+            <h4 class="border-bottom"><?= Yii::t('app', 'My Basket') ?></h4>
             <?php if(!empty($data)){ ?>
                 <?php $rez = 0.0; ?>
                 <?php foreach($data['products'] as $item){ ?>
@@ -42,14 +42,14 @@
                     </div>
                 <?php } $i++; ?>
             <?php } else { ?>
-                <span>The basket is empty.</span>
+                <span><?= Yii::t('app', 'The basket is empty.') ?></span>
             <?php } ?>
         </div>
         <div class="col-md-4">
-            <h4 class="border-bottom">Details Order</h4>
-            <h4>Cost <span id="amount"><?php echo $data['amount']; ?></span>$</h4>
-            <h4>Total <span id="total"><?php echo $data['total']; ?></span>$</h4>
-            <a href="<?= Url::to(['orders/orderedit']); ?>" class="btn btn-primary">Price an order</a>
+            <h4 class="border-bottom"><?= Yii::t('app', 'Order details') ?></h4>
+            <h4><?= Yii::t('app', 'Cost') ?> <span id="amount"><?php echo $data['amount']; ?></span>$</h4>
+            <h4><?= Yii::t('app', 'Total') ?> <span id="total"><?php echo $data['total']; ?></span>$</h4>
+            <a href="<?= Url::to(['orders/orderedit']); ?>" class="btn btn-primary"><?= Yii::t('app', 'Place an order') ?></a>
         </div>
     </div>
 </div>

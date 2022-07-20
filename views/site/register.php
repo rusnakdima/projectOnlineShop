@@ -9,7 +9,7 @@ $this->title = 'Register';
 /* @var $form ActiveForm */
 ?>
 <div class="text-center container bg-white border rounded-5 px-5 py-5">
-    <h1 class="h3 mb-3 fw-normal">Sign up</h1>
+    <h1 class="h3 mb-3 fw-normal"><?= Yii::t('app', 'Sign up') ?></h1>
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($model, 'email', [
             'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
@@ -20,7 +20,7 @@ $this->title = 'Register';
             'labelOptions' => [
                 'for' => 'email',
             ],
-        ])->textInput()->label('Email') ?>
+        ])->textInput()->label(Yii::t('app', 'Email')) ?>
         <?= $form->field($model, 'username', [
             'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
             'inputOptions' => [
@@ -30,9 +30,9 @@ $this->title = 'Register';
             'labelOptions' => [
                 'for' => 'username',
             ],
-        ])->textInput()->label('Username') ?>
+        ])->textInput()->label(Yii::t('app', 'Username')) ?>
         <?= $form->field($model, 'password', [
-            'template' => '<div class="form-floating my-3">{input}{label}{error}<input type="checkbox" id="pass_show" class="form-check-input me-3">Show Password</div>',
+            'template' => '<div class="form-floating my-3">{input}{label}{error}<input type="checkbox" id="pass_show" class="form-check-input me-3">'.Yii::t("app", "Show Password").'</div>',
             'inputOptions' => [
                 'id' => 'passUser',
                 'class' => 'form-control'
@@ -40,9 +40,9 @@ $this->title = 'Register';
             'labelOptions' => [
                 'for' => 'passUser',
             ],
-        ])->passwordInput()->label('Password') ?>
+        ])->passwordInput()->label(Yii::t('app', 'Password')) ?>
         <?= $form->field($model, 'conf_pass', [
-            'template' => '<div class="form-floating my-3">{input}{label}{error}<input type="checkbox" id="conf_pass_show" class="form-check-input me-3">Show Password</div>',
+            'template' => '<div class="form-floating my-3">{input}{label}{error}<input type="checkbox" id="conf_pass_show" class="form-check-input me-3">'.Yii::t("app", "Show Password").'</div>',
             'inputOptions' => [
                 'id' => 'passRepeat',
                 'class' => 'form-control'
@@ -50,7 +50,7 @@ $this->title = 'Register';
             'labelOptions' => [
                 'for' => 'passRepeat',
             ],
-        ])->passwordInput()->label('Confirmed Password') ?>
+        ])->passwordInput()->label(Yii::t('app', 'Confirmed Password')) ?>
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => '<div class="mb-3">{input}{label}{error}</div>',
             'class' => 'form-check-input me-3',
@@ -58,7 +58,7 @@ $this->title = 'Register';
                 'class' => 'form-check-label',
             ]
         ]) ?>
-        <?= Html::submitButton('Sign up', ['class' => 'w-100 btn btn-lg btn-primary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Sign up'), ['class' => 'w-100 btn btn-lg btn-primary']) ?>
     <?php ActiveForm::end(); ?>
     <p class="mt-5 mb-3 text-muted">© 2022</p>
 </div>

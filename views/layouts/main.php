@@ -40,7 +40,7 @@
                     <ion-icon name="reorder-three-outline" style="width: 2.5em; height: 2.5em;"></ion-icon>
                 </button>
                 <form class="col d-flex" method="get" action="<?= Url::to(["products/search"]); ?>">
-                    <input class="form-control me-2" name="searchData" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" name="searchData" type="search" placeholder="<?= Yii::t('app', 'Search') ?>" aria-label="Search">
                     <input type="hidden" name='sort' value='popularity'/>
                     <button class="border-0 bg-white text-dark" type="submit">
                         <ion-icon name="search-outline" style="width: 2em; height: 2em;"></ion-icon>
@@ -48,26 +48,25 @@
                 </form>
                 <ul class="col navbar-nav flex-wrap mt-2 mx-3">
                     <li class="nav-item dropdown me-2">
-                        <a class="nav-link dropdown-toggle border rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
+                        <a class="nav-link dropdown-toggle border rounded-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= Yii::t('app', 'Themes'); ?></a>
                         <ul class="dropdown-menu bg-white text-dark border" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" id="light">Light</a></li>
-                            <li><a class="dropdown-item" href="#" id="dark">Dark</a></li>
+                            <li><a class="dropdown-item" href="#" id="light"><?= Yii::t('app', 'Light'); ?></a></li>
+                            <li><a class="dropdown-item" href="#" id="dark"><?= Yii::t('app', 'Dark'); ?></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle border rounded-3" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">Language</a>
+                        <a class="nav-link dropdown-toggle border rounded-3" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= Yii::t('app', 'Language'); ?></a>
                         <ul class="dropdown-menu bg-white text-dark border" aria-labelledby="navbarDropdown1">
-                            <li><a class="dropdown-item" href="#">Russian</a></li>
-                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><?php echo Html::a(Yii::t('app', 'Russian'), array_merge(Yii::$app->request->get(), [Yii::$app->controller->route, 'language' => 'ru']), ['class' => 'dropdown-item']); ?></li>
+                            <li><?php echo Html::a(Yii::t('app', 'English'), array_merge(Yii::$app->request->get(), [Yii::$app->controller->route, 'language' => 'en']), ['class' => 'dropdown-item']); ?></li>
                         </ul>
                     </li>
                 </ul>
-                
                 <div class="col">
                     <a href="<?= Url::to(['products/cartitem']) ?>"><ion-icon name="cart-outline"></ion-icon></a>
                     <?php if(Yii::$app->user->isGuest){ ?>
-                        <a type="button" class="btn btn-outline-primary me-2" href="<?= Url::to(['site/login']) ?>">Login</a>
-                        <a type="button" class="btn btn-primary" href="<?= Url::to(['site/register']) ?>">Sign-up</a>
+                        <a type="button" class="btn btn-outline-primary me-2" href="<?= Url::to(['site/login']) ?>"><?= Yii::t('app', 'Login') ?></a>
+                        <a type="button" class="btn btn-primary" href="<?= Url::to(['site/register']) ?>"><?= Yii::t('app', 'Sign up') ?></a>
                     <?php } else { ?>
                         <button class="border-0 bg-white text-dark" type="button" data-bs-toggle="collapse" href="#profile" role="button" aria-expanded="false" aria-controls="profile">
                             <ion-icon name="person-outline"></ion-icon>
@@ -79,17 +78,17 @@
         <div class="collapse dropdown-menu row row-cols-1 row-cols-sm-2 row-cols-md-5 bg-white text-dark" id="collapseExample">
             <div class="col">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/" class="nav-link"><?= Yii::t('app', 'Home') ?></a></li>
                     <?php foreach (Yii::$app->cat->getData() as $item){?>
-                        <?= '<li class="nav-item"><a href="'. Url::to(["products/catitem", "item" => $item["category"], 'sort'=>'popularity']) .'" class="nav-link">'.$item["category"].'</a></li>'; ?>
+                        <?= '<li class="nav-item"><a href="'. Url::to(["products/catitem", "item" => $item["category"], 'sort'=>'popularity']) .'" class="nav-link">'.Yii::t('app', $item["category"]).'</a></li>'; ?>
                     <?php } ?>
-                    <li class="nav-item"><a href="<?= Url::to(['site/view', 'view'=>'about']); ?>" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="<?= Url::to(['site/view', 'view'=>'about']); ?>" class="nav-link"><?= Yii::t('app', 'About us') ?></a></li>
                 </ul>
             </div>
             <div class="col">
                 <ul class="nav flex-column">
                     <?php foreach (Yii::$app->subcat->getData() as $item){?>
-                        <?= '<li class="nav-item"><a href="'. Url::to(["products/subcatitem", "item" => $item["subcategory"], 'sort'=>'popularity']) .'" class="nav-link">'.$item["subcategory"].'</a></li>'; ?>
+                        <?= '<li class="nav-item"><a href="'. Url::to(["products/subcatitem", "item" => $item["subcategory"], 'sort'=>'popularity']) .'" class="nav-link">'.Yii::t('app', $item["subcategory"]).'</a></li>'; ?>
                     <?php } ?>
                 </ul>
             </div>
@@ -98,9 +97,9 @@
             <div class="figure-img"><ion-icon name="person-outline"></ion-icon></div>
             <big><?= Yii::$app->user->identity->username ?></big><br>
             <?php if(Yii::$app->user->identity->username == "admin"){?>
-                <a type="button" href="<?= Url::to(['admin/index']); ?>" class="btn btn-primary">Admin Panel</a><br><br>
+                <a type="button" href="<?= Url::to(['admin/index']); ?>" class="btn btn-primary"><?= Yii::t('app', 'Admin Panel') ?></a><br><br>
             <?php } ?>
-            <a type="button" href="<?= Url::to(['site/logout']) ?>" class="btn btn-primary">Log out</a>
+            <a type="button" href="<?= Url::to(['site/logout']) ?>" class="btn btn-primary"><?= Yii::t('app', 'Log out') ?></a>
         </div>
 
         <!--Content-->
@@ -111,10 +110,10 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-2 mt-5 mx-2 border-top">
                 <?php foreach (Yii::$app->cat->getData() as $item){?>
                     <div class="col mb-3">
-                        <h5><a href="<?= Url::to(['products/catitem', "item" => $item["category"], 'sort'=>'popularity']); ?>" class="nav-link p-0"><?= $item["category"]; ?></a></h5>
+                        <h5><a href="<?= Url::to(['products/catitem', "item" => $item["category"], 'sort'=>'popularity']); ?>" class="nav-link p-0"><?= Yii::t('app', $item["category"]); ?></a></h5>
                         <ul class="nav flex-column">
                             <?php foreach (Yii::$app->subcat->getDataSubCat($item["category"]) as $item){?>
-                                <li class="nav-item mb-2"><a href="<?= Url::to(['products/subcatitem', "item" => $item["subcategory"], 'sort'=>'popularity']); ?>" class="nav-link p-0"><?= $item["subcategory"]; ?></a></li>
+                                <li class="nav-item mb-2"><a href="<?= Url::to(['products/subcatitem', "item" => $item["subcategory"], 'sort'=>'popularity']); ?>" class="nav-link p-0"><?= Yii::t('app', $item["subcategory"]); ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -130,7 +129,7 @@
                     <a href="https://www.youtube.com/channel/UCulRfcSqKl30sYNBuQ6CsHA" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
                 </div>
                 <br>
-                <p class="text-muted">© 2022 <a href="<?= Url::to(['site/view', 'view'=>'terms']) ?>" class="link-dark">Terms of Service</a> <a href="<?= Url::to(['site/view', 'view'=>'privacy']) ?>" class="link-dark">Privacy Policy</a> <a href="<?= Url::to(['site/view', 'view'=>'about']) ?>" class="link-dark">About Us</a></p>
+                <p class="text-muted">© 2022 <a href="<?= Url::to(['site/view', 'view'=>'terms']) ?>" class="link-dark"><?= Yii::t('app', 'Terms of Service') ?></a> <a href="<?= Url::to(['site/view', 'view'=>'privacy']) ?>" class="link-dark"><?= Yii::t('app', 'Privacy Policy') ?></a> <a href="<?= Url::to(['site/view', 'view'=>'about']) ?>" class="link-dark"><?= Yii::t('app', 'About us') ?></a></p>
             </div>
         </footer>
         

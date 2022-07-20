@@ -4,13 +4,13 @@
     use yii\widgets\ActiveForm;
     use yii\widgets\LinkPager;
 
-    $this->title = 'Product Edit';
+    $this->title = Yii::t('app', 'Editing products');
 ?>
 
 <div class="container bg-white text-dark border rounded-2 px-5 py-5">
     <a onclick="window.history.back();" class="text-decoration-none bg-white text-dark"><ion-icon name="arrow-back-outline"></ion-icon></a>
     <div class="row row-cols-auto">
-        <h3 class="col-6 mb-3 fw-normal">Product Item</h3>
+        <h3 class="col-6 mb-3 fw-normal"><?= Yii::t('app', 'Products') ?></h3>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($find, 'product', [
                 'template' => '<div class="form-floating col d-flex text-right">{input}{label}<button class="border-0 bg-white text-dark"><ion-icon name="search-outline" style="width: 2em; height: 2em;"></ion-icon></button></div>',
@@ -21,25 +21,25 @@
                 'labelOptions' => [
                     'for' => 'fProduct',
                 ],
-            ])->textInput()->label('Search product') ?>
+            ])->textInput()->label(Yii::t('app', 'Search product')) ?>
         <?php ActiveForm::end(); ?>
     </div>
-    <h5>Products</h5>
+    <br>
     <table cellspacing="0" cellpadding="5" id="products">
         <thead>
             <tr>
                 <td class="border">ID</td>
-                <td class="border">Product (name)</td>
-                <td class="border">Category (Name)</td>
-                <td class="border">Subcategory (Name)</td>
-                <td class="border">Prace ($)</td>
-                <td class="border">Discount (%)</td>
-                <td class="border">Description</td>
-                <td class="border">Specifications</td>
-                <td class="border">Link</td>
-                <td class="border">Count add cart</td>
-                <td class="border">Date create</td>
-                <td class="border">Date update</td>
+                <td class="border"><?= Yii::t('app', 'Product name') ?></td>
+                <td class="border"><?= Yii::t('app', 'Category name') ?></td>
+                <td class="border"><?= Yii::t('app', 'Subcategory name') ?></td>
+                <td class="border"><?= Yii::t('app', 'Prace ($)') ?></td>
+                <td class="border"><?= Yii::t('app', 'Discount (%)') ?></td>
+                <td class="border"><?= Yii::t('app', 'Description') ?></td>
+                <td class="border"><?= Yii::t('app', 'Specifications') ?></td>
+                <td class="border"><?= Yii::t('app', 'Link on image') ?></td>
+                <td class="border"><?= Yii::t('app', 'Number of adds cart') ?></td>
+                <td class="border"><?= Yii::t('app', 'Date create') ?></td>
+                <td class="border"><?= Yii::t('app', 'Date update') ?></td>
             </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@
 
 <div class="container bg-white text-dark border rounded-2 px-5 py-5">
     <details>
-        <summary class="h3 mb-3 fw-normal">Edit and Save Data</summary>
+        <summary class="h3 mb-3 fw-normal"><?= Yii::t('app', 'Edit and Save Data')?></summary>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($productEdit, 'id', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
@@ -92,7 +92,7 @@
                 'labelOptions' => [
                     'for' => 'productP',
                 ],
-            ])->textInput()->label('Product') ?>
+            ])->textInput()->label(Yii::t('app', 'Product')) ?>
             <?= $form->field($productEdit, 'category', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                 'inputOptions' => [
@@ -102,7 +102,7 @@
                 'labelOptions' => [
                     'for' => 'categoryP',
                 ],
-            ])->textInput(['type' => 'number'])->label('Category (ID)') ?>
+            ])->textInput(['type' => 'number'])->label(Yii::t('app', 'Category').' (ID)') ?>
             <div class="mx-2" id="categoryList">
                 <span>List</span><br>
                 <?php for($i = 0; $i < count($category); $i++){ ?>
@@ -118,7 +118,7 @@
                 'labelOptions' => [
                     'for' => 'subcategoryP',
                 ],
-            ])->textInput(['type' => 'number'])->label('Subcategory (ID)') ?>
+            ])->textInput(['type' => 'number'])->label(Yii::t('app', 'Subcategory').' (ID)') ?>
             <div class="mx-2" id="subcategoryList">
                 <span>List</span><br>
                 <?php for($i = 0; $i < count($subcategory); $i++){ ?>
@@ -134,7 +134,7 @@
                 'labelOptions' => [
                     'for' => 'priceP',
                 ],
-            ])->textInput()->label('Price') ?>
+            ])->textInput(['type' => 'number'])->label(Yii::t('app', 'Price')) ?>
             <?= $form->field($productEdit, 'discount', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                 'inputOptions' => [
@@ -144,7 +144,7 @@
                 'labelOptions' => [
                     'for' => 'discountP',
                 ],
-            ])->textInput()->label('Discount') ?>
+            ])->textInput(['type' => 'number'])->label(Yii::t('app', 'Discount')) ?>
             <?= $form->field($productEdit, 'description', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                 'inputOptions' => [
@@ -154,7 +154,7 @@
                 'labelOptions' => [
                     'for' => 'descriptionP',
                 ],
-            ])->textArea(['style' => 'height: 200px'])->label('Description') ?>
+            ])->textArea(['style' => 'height: 200px'])->label(Yii::t('app', 'Description')) ?>
             <?= $form->field($productEdit, 'specifications', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                 'inputOptions' => [
@@ -164,7 +164,7 @@
                 'labelOptions' => [
                     'for' => 'specificationsP',
                 ],
-            ])->textArea(['style' => 'height: 200px'])->label('Specifications') ?>
+            ])->textArea(['style' => 'height: 200px'])->label(Yii::t('app', 'Specifications')) ?>
             <?= $form->field($productEdit, 'link', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                 'inputOptions' => [
@@ -174,12 +174,12 @@
                 'labelOptions' => [
                     'for' => 'linkP',
                 ],
-            ])->textInput()->label('Link') ?>
-            <?= Html::submitButton('Update/Save', ['class' => 'btn btn-lg btn-primary']) ?>
+            ])->textInput()->label(Yii::t('app', 'Link on image')) ?>
+            <?= Html::submitButton(Yii::t('app', 'Update/Save'), ['class' => 'btn btn-lg btn-primary']) ?>
         <?php ActiveForm::end(); ?>
     </details>
     <details>
-        <summary class="h3 mb-3 fw-normal">Delete Data</summary>
+        <summary class="h3 mb-3 fw-normal"><?= Yii::t('app', 'Delete Data') ?></summary>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($delItem, 'id', [
                 'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
@@ -191,7 +191,7 @@
                     'for' => 'id1',
                 ],
             ])->textInput()->label('ID') ?>
-            <?= Html::submitButton('Delete', ['class' => 'btn btn-lg btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Delete'), ['class' => 'btn btn-lg btn-primary']) ?>
         <?php ActiveForm::end(); ?>
     </details>
 </div>

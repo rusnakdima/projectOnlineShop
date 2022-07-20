@@ -52,6 +52,34 @@ class m220712_094521_accounts extends Migration
             'count' => $this->integer(),
             'cost' => $this->integer(),
         ]);
+        $this->createTable('source_message', [
+            'id' => $this->primaryKey(),
+            'category' => $this->string(),
+            'message' => $this->text(),
+        ]);
+        $this->createIndex(
+            'idx-source_message_category',
+            'source_message',
+            'category'
+        );
+        $this->createTable('message', [
+            'id' => $this->primaryKey(),
+            'language' => $this->string(16),
+            'translation' => $this->text(),
+        ]);
+        $this->addForeignKey(
+            'fk-message_source_message',
+            'message',
+            'id',
+            'source_message',
+            'id',
+            'CASCADE'
+        );
+        $this->createIndex(
+            'idx-message_language',
+            'message',
+            'language'
+        );
         $this->addForeignKey(
             'fk-products-categories-id',
             'products',
@@ -115,11 +143,25 @@ class m220712_094521_accounts extends Migration
             'fk-orders-accounts-id',
             'orders'
         );
+        $this->dropForeignKey(
+            'fk-message_source_message',
+            'orders'
+        );
+        $this->dropIndex(
+            'idx-source_message_category',
+            'orders'
+        );
+        $this->dropIndex(
+            'idx-message_language',
+            'orders'
+        );
         $this->dropTable('accounts');
         $this->dropTable('orders');
         $this->dropTable('categories');
         $this->dropTable('subcategories');
         $this->dropTable('products');
+        $this->dropTable('source_message');
+        $this->dropTable('message');
         return false;
     }
     public function safeUp(){}

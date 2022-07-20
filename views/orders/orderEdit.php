@@ -3,17 +3,17 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
 
-    $this->title = 'Order';
+    $this->title = Yii::t('app', 'Making an order');
 ?>
 
 <div class="modal border">
     <div class="modal-dialog">
         <div class="modal-content bg-white text-dark">
             <div class="modal-header">
-                <h5 class="modal-title">Order rezult</h5>
+                <h5 class="modal-title"><?= Yii::t('app', 'The result of the order') ?></h5>
             </div>
             <div class="modal-body">
-                <p>The order has been successfully completed!</p>
+                <p><?= Yii::t('app', 'The order has been successfully completed!') ?></p>
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-primary" href="<?= Url::to(['products/cartitem']); ?>">Ok</a>
@@ -24,11 +24,11 @@
 
 
 <div class="container my-3 bg-white text-dark">
-    <h3>Making an order</h3>
+    <h3><?= Yii::t('app', 'Making an order') ?></h3>
     <?php $form = ActiveForm::begin(); ?>
         <div class="row row-cols-2">
             <div class="col-7">
-                <h5>Contact information</h5>
+                <h5><?= Yii::t('app', 'Contact information') ?></h5>
                     <?php $str; foreach($dataCart['products'] as $item){
                         $str .= $item['id'].', ';
                     } ?>
@@ -87,7 +87,7 @@
                         'labelOptions' => [
                             'for' => 'name',
                         ],
-                    ])->textInput()->label('Name') ?>
+                    ])->textInput()->label(Yii::t('app', 'Name')) ?>
                     <?= $form->field($order, 'surname', [
                         'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                         'inputOptions' => [
@@ -97,7 +97,7 @@
                         'labelOptions' => [
                             'for' => 'surname',
                         ],
-                    ])->textInput()->label('Surname') ?>
+                    ])->textInput()->label(Yii::t('app', 'Surname')) ?>
                     <?= $form->field($order, 'phone', [
                         'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                         'inputOptions' => [
@@ -107,7 +107,7 @@
                         'labelOptions' => [
                             'for' => 'phone',
                         ],
-                    ])->textInput()->label('Phone') ?>
+                    ])->textInput()->label(Yii::t('app', 'Phone')) ?>
                     <?= $form->field($order, 'email', [
                         'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                         'inputOptions' => [
@@ -117,7 +117,7 @@
                         'labelOptions' => [
                             'for' => 'email',
                         ],
-                    ])->textInput()->label('Email') ?>
+                    ])->textInput()->label(Yii::t('app', 'Email')) ?>
                     <?= $form->field($order, 'address', [
                         'template' => '<div class="form-floating my-3">{input}{label}{error}</div>',
                         'inputOptions' => [
@@ -127,16 +127,16 @@
                         'labelOptions' => [
                             'for' => 'address',
                         ],
-                    ])->textInput()->label('Address') ?>
+                    ])->textInput()->label(Yii::t('app', 'Address')) ?>
             </div>
             <div class="col-5">
-                <div class="text-center"><h5>Your order</h5></div>
+                <div class="text-center"><h5><?= Yii::t('app', 'Order details') ?></h5></div>
                 <div class="row row-cols-2">
                     <div class="col-7">
-                        <span>Products</span><br>
-                        <span>Delivery</span><br>
-                        <span>Discount</span><br>
-                        <h4>Total</h4>
+                        <span><?= Yii::t('app', 'Products') ?></span><br>
+                        <span><?= Yii::t('app', 'Delivery') ?></span><br>
+                        <span><?= Yii::t('app', 'Discount') ?></span><br>
+                        <h4><?= Yii::t('app', 'Total') ?></h4>
                     </div>
                     <div class="col-5">
                         <div class="text-end"><span><?= $dataCart['amount'] ?>$</span></div>
@@ -145,7 +145,7 @@
                         <div class="text-end"><h4><?= $dataCart['total'] ?>$</h4></div>
                     </div>
                 </div>
-                <?= Html::submitButton('Order', ['class' => 'btn btn-lg btn-primary', 'id' => 'order-btn']) ?>
+                <?= Html::submitButton(Yii::t('app', 'To order'), ['class' => 'btn btn-lg btn-primary', 'id' => 'order-btn']) ?>
             </div>
         </div>
     <?php $form = ActiveForm::end(); ?>

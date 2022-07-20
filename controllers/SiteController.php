@@ -5,8 +5,29 @@
     use yii\web\Controller;
     use app\models\Register;
     use app\models\LoginForm;
+    use yii\filters\AccessControl;
 
     class SiteController extends Controller{
+        /*public function behaviors(){
+            return [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'only' => ['login', 'logout', 'signup'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['login', 'signup'],
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['logout'],
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
+            ];
+        }*/
         public function actions(){
             return [
                 'view' => [

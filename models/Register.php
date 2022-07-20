@@ -27,8 +27,8 @@ class Register extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return [
             [['username', 'password', 'email', 'conf_pass', 'rememberMe'], 'required'],
 
-            ['username', 'unique', 'targetClass' => '\app\models\Register', 'message' => 'This username has already been taken.'],
-            ['email', 'unique', 'targetClass' => '\app\models\Register', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\app\models\Register', 'message' => Yii::t('app', 'This username has already been taken.')],
+            ['email', 'unique', 'targetClass' => '\app\models\Register', 'message' => Yii::t('app', 'This email has already been taken.')],
             
             [['password'], 'string', 'min' => '6'],
             ['conf_pass', 'compare', 'compareAttribute' => 'password', 'message'=>"Passwords don't match"],
@@ -70,11 +70,11 @@ class Register extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public function attributeLabels(){
         return [
-            'email' => 'Email',
-            'username' => 'Login',
-            'password' => 'Password',
-            'conf_pass' => 'Confirmed Password',
-            'rememberMe' => 'I accept the Terms of Use & Privacy Policy',
+            'email' => Yii::t('app', 'Email'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'conf_pass' => Yii::t('app', 'Confirmed Password'),
+            'rememberMe' => Yii::t('app', 'I accept the Terms of Use & Privacy Policy'),
         ];
     }
 
