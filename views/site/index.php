@@ -19,7 +19,7 @@
         <?php foreach($dataPopular as $item){ ?>
             <div class="col mb-3">
                 <a href="<?= Url::to(['products/infoitem', 'item'=>$item['product']]); ?>" class="link-dark text-decoration-none">
-                    <img style="width: 200px; height: 200px;" alt="Image" src="assets/images/<?php echo $item['link']; ?>" /><br>
+                    <img style="width: 200px; height: 200px;" alt="Image" src="/assets/images/<?php echo $item['link']; ?>" /><br>
                     <!--<span><?php $num = $item['category']; echo $category[$num-1]['category']; ?> -> <?php $num = $item['subcategory']; echo $subcategory[$num-1]['subcategory']; ?></span>-->
                     <h5><?php echo $item['product']; ?></h5>
                     <?php if($item['discount'] > 0){ ?>
@@ -39,7 +39,7 @@
         <?php foreach($dataNewProduct as $item){ ?>
             <div class="col mb-3">
                 <a href="<?= Url::to(['products/infoitem', 'item'=>$item['product']]); ?>" class="link-dark text-decoration-none">
-                    <img style="width: 200px; height: 200px;" alt="Image" src="assets/images/<?php echo $item['link']; ?>" /><br>
+                    <img style="width: 200px; height: 200px;" alt="Image" src="/assets/images/<?php echo $item['link']; ?>" /><br>
                     <!--<span><?php $num = $item['category']; echo $category[$num-1]['category']; ?> -> <?php $num = $item['subcategory']; echo $subcategory[$num-1]['subcategory']; ?></span>-->
                     <h5><?php echo $item['product']; ?></h5>
                     <?php if($item['discount'] > 0){ ?>

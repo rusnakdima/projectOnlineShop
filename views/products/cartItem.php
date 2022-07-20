@@ -23,7 +23,7 @@
                 <?php $rez = 0.0; ?>
                 <?php foreach($data['products'] as $item){ ?>
                     <div class="container row row-cols-auto mb-3 pb-3 border-bottom border-1">
-                        <img class="col" src="assets/images/<?php echo $dataProduct[$item['id']-1]['link']; ?>" />
+                        <img class="col" src="/assets/images/<?php echo $dataProduct[$item['id']-1]['link']; ?>" />
                         <span class="col"><?php echo $item['name']; ?></span>
                         <input type="hidden" name="idR" value="<?php echo $item['id']; ?>" />
                         <input type="number" name="countR" class="col form-control w-25" value="<?php echo $item['count']; ?>" />
