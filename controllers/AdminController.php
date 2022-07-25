@@ -114,8 +114,8 @@
             if ($categoryEdit->load(Yii::$app->request->post()) && $categoryEdit->editCategory()) {
                 return $this->redirect(['catedit']);
             }
-
-            if($delItem->load(Yii::$app->request->post())){
+            
+            if ($delItem->load(Yii::$app->request->post())){
                 $values = explode(",", str_replace(" ", "", $_POST['DeleteCat']['id']));
                 foreach($values as $val){
                     $delItem = DeleteCat::findOne($val);

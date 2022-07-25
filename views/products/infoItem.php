@@ -25,7 +25,7 @@
             <?php } ?>
             <span><?= Yii::t('app', 'Number of') ?></span>
             <form method="post" action="<?= Url::to(['products/infoitem', 'item' => $data['product']]); ?>">
-                <input type="number" name="count" class="form-control w-25" value="1" /><br>
+                <input type="number" name="count" class="form-control" value="1" /><br>
                 <input type="hidden" name="id" value="<?= $data['id']; ?>">
                 <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->csrfToken); ?>
                 <button type="submit" class="btn btn-primary"><?= Yii::t('app', 'Add to cart') ?></button>

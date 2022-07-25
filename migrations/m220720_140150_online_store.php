@@ -35,7 +35,7 @@ class m220720_140150_online_store extends Migration
             'description' => $this->text(),
             'specifications' => $this->text(),
             'link' => $this->text(),
-            'count_add_cart' => $this->integer(),
+            'count_add_cart' => $this->integer()->notNull()->defaultValue(0),
             'created_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP',
             'updated_at' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
         ]);
