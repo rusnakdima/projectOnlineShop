@@ -135,29 +135,15 @@
                     $i++;
                 }
                 $data = [];
-                //$filter = [];
                 $k = 0;
                 for($i = 0; $i < count($arr2); $i++){
                     for($j = 0; $j < count($arr2); $j++){
                         if($arr2[$i][$j]['product_id'] != ''){
                             $data[$k] = (new \yii\db\Query())->from('products')->where(['id' => $arr2[$i][$j]['product_id']])->one();
-                            //$filter[$i] = (new \yii\db\Query())->from('specific'.$_GET['item'])->where(['product_id' => $data[$i]['id']])->all()[0];
                             $k++;
                         }
                     }
                 }
-                /*$arr = [];
-                $i = 0;
-                foreach ($filter as $key => $value){
-                    foreach ($value as $key1 => $value1){
-                        $arr[$key1][$i] = $value1;
-                        $i++;
-                        $arr[$key1] = array_unique($arr[$key1]);
-                    }
-                }
-                unset($arr['id']);
-                unset($arr['product_id']);
-                $filter = $arr;*/
                 for($i = 0; $i < count($data); $i++){
                     $data[$i]['orders'] = 0;
                 }
@@ -265,7 +251,6 @@
             }
             
             if(Yii::$app->request->post()){
-                //print_r(Yii::$app->request->post());
                 $arr = Yii::$app->request->post();
                 $str = '';
                 foreach($arr as $key => $val) {
@@ -325,6 +310,21 @@
                     $arr[$item['product_id']] = $item['count'];
                 }
             }
+
+            $nameTB = (new \yii\db\Query())->from('categories')->where(['id'=>(new \yii\db\Query())->from('subcategories')->where(['subcategory'=>$_GET['item']])->one()['category']])->one()['category'];
+            $filter = (new \yii\db\Query())->from('specific'.$nameTB)->all();
+            $arr = [];
+            $i = 0;
+            foreach ($filter as $key => $value){
+                foreach ($value as $key1 => $value1){
+                    $arr[$key1][$i] = $value1;
+                    $i++;
+                    $arr[$key1] = array_unique($arr[$key1]);
+                }
+            }
+            unset($arr['id']);
+            unset($arr['product_id']);
+            $filter = $arr;
             
             if ($_GET['sort'] == 'popularity'){
                 $data = (new \yii\db\Query())->from('products')->where(['subcategory'=>(new \yii\db\Query())->from('subcategories')->where(['subcategory'=>$_GET['item']])->one()['id']])->orderBy('count_add_cart DESC')->all();
@@ -384,9 +384,8 @@
                     }
                 }
             }
-            $nameTB = (new \yii\db\Query())->from('categories')->where(['id'=>(new \yii\db\Query())->from('subcategories')->where(['subcategory'=>$_GET['item']])->one()['category']])->one()['category'];
+            
             if(Yii::$app->request->post()){
-                //print_r(Yii::$app->request->post());
                 $arr = Yii::$app->request->post();
                 $str = '';
                 foreach($arr as $key => $val) {
@@ -414,20 +413,6 @@
 
             $category = (new \yii\db\Query())->from('categories')->all();
             $subcategory = (new \yii\db\Query())->from('subcategories')->all();
-
-            $filter = (new \yii\db\Query())->from('specific'.$nameTB)->all();
-            $arr = [];
-            $i = 0;
-            foreach ($filter as $key => $value){
-                foreach ($value as $key1 => $value1){
-                    $arr[$key1][$i] = $value1;
-                    $i++;
-                    $arr[$key1] = array_unique($arr[$key1]);
-                }
-            }
-            unset($arr['id']);
-            unset($arr['product_id']);
-            $filter = $arr;
 
             return $this->render('subcatitem', [
                 'data' => $data,

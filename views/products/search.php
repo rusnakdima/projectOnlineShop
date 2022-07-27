@@ -25,8 +25,8 @@
 </div>
 
 <div class="row">
-    <!--<div class="col-auto">
-        <form method="post" action="<?= Url::to(['', 'item' => $_GET['item'], 'sort' => $_GET['sort']]) ?>">
+    <div class="col-auto">
+        <form method="post" action="<?= Url::to(['', 'searchData' => $_GET['searchData'], 'sort' => $_GET['sort']]) ?>">
             <div class="p-3 bg-white text-dark" style="width: 15rem;">
                 <button type="submit" class="btn border bg-white text-dark"><?= Yii::t('app', 'Apply') ?></button>
                 <ul class="list-unstyled ps-0">
@@ -43,7 +43,7 @@
                 </ul>
             </div>
         </form>
-    </div>-->
+    </div>
     <div class="col">
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 py-2 mt-5 mx-2 bg-white text-dark">
             <?php if($data != null){ ?>

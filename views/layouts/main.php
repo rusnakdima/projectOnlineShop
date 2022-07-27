@@ -43,12 +43,12 @@
                 <div class="col-auto" id="logo">
                     <a href="/" class="mb-2 mb-md-0 text-decoration-none">Name company</a>
                     <button class="border-0 right-0 float-end bg-white text-dark" type="button" data-bs-toggle="collapse" href="#navmenu" aria-expanded="false" aria-controls="navmenu">
-                        <ion-icon name="reorder-three-outline" style="width: 2.5em; height: 2.5em;"></ion-icon>
+                        <ion-icon name="menu-outline" style="width: 2.5em; height: 2.5em;"></ion-icon>
                     </button>
                 </div>
                 <form id="elemHide1" class="col" method="get" action="<?= Url::to(["products/search"]); ?>">
-                    <input class="form-control" name="searchData" type="search" placeholder="<?= Yii::t('app', 'Search') ?>" aria-label="Search">
-                    <input type="hidden" name='sort' value='popularity'/>
+                    <input class="form-control form-control-lg" style="width: 95%; display: initial;" name="searchData" type="search" placeholder="<?= Yii::t('app', 'Search') ?>" aria-label="Search">
+                    <input type="hidden" name='sort' value='popularity'>
                     <button class="border-0 bg-white text-dark" type="submit">
                         <ion-icon name="search-outline" style="width: 2em; height: 2em;"></ion-icon>
                     </button>
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </header>
+        <!--Navigation Menu-->
         <div class="border collapse position-absolute row row-cols-2 bg-white text-dark" style="z-index: 500; left: 15px;" id="navmenu">
             <ul class="nav d-block">
                 <li class="nav-item"><a href="/" class="nav-link"><?= Yii::t('app', 'Home') ?></a></li>
@@ -80,6 +81,7 @@
                 <?php } ?>
             </ul>
         </div>
+        <!--Profile Modal Window-->
         <div id="profile" class="collapse dropdown-menu bg-white text-dark border rounded-3 p-3 text-center float-end position-absolute" style="right: 5px;">
             <div class="figure-img"><ion-icon name="person-outline"></ion-icon></div>
             <big><?= Yii::$app->user->identity->username ?></big><br>
@@ -103,6 +105,7 @@
                 <ion-icon name="person-outline"></ion-icon>
             </button>
         </nav>
+        <!--Search Modal Window-->
         <div id="searchMenu" class="collapse dropdown-menu bg-white text-dark border rounded-3 p-3 text-center float-end position-absolute" style="left: 5rem; bottom: 70px;">
             <form class="col" method="get" action="<?= Url::to(["products/search"]); ?>">
                 <input class="form-control me-2" name="searchData" type="search" placeholder="<?= Yii::t('app', 'Search') ?>" aria-label="Search">
@@ -112,6 +115,7 @@
                 </button>
             </form>
         </div>
+        <!--Profile Modal Window-->
         <div id="profileMenu" class="collapse dropdown-menu bg-white text-dark border rounded-3 p-3 text-center float-end position-absolute" style="right: 5px; bottom: 70px;">
             <?php if(Yii::$app->user->isGuest){ ?>
                 <a type="button" class="btn btn-outline-primary me-2" href="<?= Url::to(['site/login']) ?>"><?= Yii::t('app', 'Login') ?></a>
